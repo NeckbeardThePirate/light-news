@@ -1,128 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Light News</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="index.js" defer></script>
+		<script
+			src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+			async
+			defer></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Light News</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="index.js" defer></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
-</head>
+	<body class="bg-neutral-900 font-mono w-screen overflow-x-hidden" x-data>
+		<div class="max-w-5xl mx-auto px-4 sm:px-4 lg:px-8">
+			<!-- Header -->
+			<div class="w-full flex flex-col items-center text-center mb-8">
+				<h1
+					class="text-neutral-400 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4">
+					Light News
+				</h1>
+				<h2
+					class="text-neutral-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+					So you don't have to plug in.
+				</h2>
+			</div>
 
-<body class="bg-neutral-900 font-mono w-screen overflow-x-hidden" x-data>
-    <div class="max-w-[1200px] m-auto">
-        <div class="box-border w-full h-fit flex mb-2 p-4 flex-col align-middle text-center ">
-            <h1 class="text-neutral-400 text-7xl mb-4">Light News</h1>
-            <h2 class="text-neutral-400 text-4xl">So you don't have to check the news.</h2>
-        </div>
-        <div class="w-3/5 h-fit flex m-2 p-4 flex-col align-middle m-auto">
-            <h2 class="text-neutral-400 text-4xl mb-4">Why?</h2>
-            <h2 class="text-neutral-400 text-2xl">You may have unplugged, but for some of us, we still need to know
-                what's
-                going on in the world.
-                Can we stay distraction free on [Insert your news site of choice]? No. That's why
-                light news exists, a simple,
-                distraction free summary of what's going on in the world.
-                Because you're a light phone user, not a hermit.</h2>
-        </div>
-        <div class="w-3/5 h-fit flex m-2 p-4 flex-col align-middle m-auto">
-            <h2 class="text-neutral-400 text-4xl mb-4">How?</h2>
-            <h2 class="text-neutral-400 text-2xl">Fill out the form below, and for just a few dollars a year (Pricing
-                TBD)
-                get weekly summaries and short
-                synopsis of impactful news
-                that matters to you. Or for a few bucks a month (Pricing TBD) get daily news synopsis. Only what
-                matters,
-                only once. That's light news.
-            </h2>
-        </div>
-        <div class="w-3/5 h-fit flex m-2 p-4 flex-col align-middle m-auto">
-            <div class="w-full max-w-md mx-auto p-4">
-                <h2 class="text-neutral-200 text-2xl font-semibold mb-4 text-center">
-                    Notify Me When Available
-                </h2>
+			<!-- Why Section -->
+			<div class="w-full max-w-3xl mx-auto mb-8 px-4 sm:px-6">
+				<h2
+					class="text-neutral-400 text-2xl sm:text-3xl md:text-4xl mb-4">
+					Why?
+				</h2>
+				<p
+					class="text-neutral-400 text-base sm:text-lg md:text-xl leading-relaxed">
+					You may have unplugged, but for some of us, we still need to
+					know what's going on in the world. Can we stay
+					distraction-free on [Insert your news site of choice]? No.
+					That's why Light News exists: a simple, distraction-free
+					summary of what's going on in the world. Because you're a
+					light phone user, not a hermit.
+				</p>
+			</div>
 
-                <label for="text-input" class="block mb-2 text-sm font-medium text-neutral-300">
-                    Email:
-                </label>
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAABZq1gdDeOFWQS_4">
-                </div>
-                <div class="flex space-x-2">
-                    <input id="text-input" type="text" x-model="$store.notifier.email" placeholder="you@example.me"
-                        class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
-                    <button x-text="$store.notifier.btnText" @click="$store.notifier.signThemUp()"
-                        class="px-4 py-2 rounded-md bg-white text-neutral-900 font-semibold hover:bg-gray-200 transition">
-                        <div x-show="$store.notifier.isProcessing" class="flex items-center justify-center">
-                            <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
-                                </path>
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-                <div x-show="$store.notifier.successful"
-                    class="w-full bg-green-600 border-white border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                    Awesome, we'll let you know!</div>
-                <div x-show="$store.notifier.isInvalid"
-                    class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                    Sorry, that email is invalid</div>
-                <div x-show="$store.notifier.systemFailure"
-                    class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                    Sorry, our systems broke, please try again later</div>
-            </div>
-        </div>
-    </div>
+			<!-- How Section -->
+			<div class="w-full max-w-3xl mx-auto mb-12 px-4 sm:px-6">
+				<h2
+					class="text-neutral-400 text-2xl sm:text-3xl md:text-4xl mb-4">
+					How?
+				</h2>
+				<p
+					class="text-neutral-400 text-base sm:text-lg md:text-xl leading-relaxed">
+					Fill out the form below, and for just a few dollars a year
+					(Pricing TBD) get weekly summaries and short synopsis of
+					impactful news that matters to you. Or for a few bucks a
+					month (Pricing TBD) get daily news synopsis. Only what
+					matters, only once. That's Light News.
+				</p>
+			</div>
 
-    <div class="w-3/5 h-fit flex m-2 p-4 flex-col align-middle m-auto">
-        <div class="w-full max-w-md mx-auto p-4">
-            <h2 class="text-neutral-200 text-2xl font-semibold mb-4 text-center">
-                Or Sign Up Now:<br><span class="text-lg font-normal">No Credit Card Required and We'll give you the
-                    first month (weekly), or first week (daily), free once we launch</span>
-            </h2>
+			<div class="w-full h-fit flex p-4 flex-col align-middle m-auto">
+				<div class="w-full max-w-md mx-auto">
+					<h2
+						class="text-neutral-200 text-2xl font-semibold mb-4 text-center">
+						Notify Me When Available
+					</h2>
 
-            <label for="text-input" class="block mb-2 text-sm font-medium text-neutral-300">
-                Email:
-            </label>
+					<label
+						for="text-input"
+						class="block mb-2 text-sm font-medium text-neutral-300">
+						Email:
+					</label>
+					<div
+						class="cf-turnstile"
+						data-sitekey="0x4AAAAAABZq1gdDeOFWQS_4"></div>
+					<div class="flex space-x-2">
+						<input
+							id="text-input"
+							type="text"
+							x-model="$store.notifier.email"
+							placeholder="you@example.me"
+							class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
+						<button
+							x-text="$store.notifier.btnText"
+							@click="$store.notifier.signThemUp()"
+							class="px-4 py-2 rounded-md bg-white text-neutral-900 font-semibold hover:bg-gray-200 transition">
+							<div
+								x-show="$store.notifier.isProcessing"
+								class="flex items-center justify-center">
+								<svg
+									class="animate-spin h-8 w-8 text-blue-500"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24">
+									<circle
+										class="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										stroke-width="4"></circle>
+									<path
+										class="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+								</svg>
+							</div>
+						</button>
+					</div>
+					<div
+						x-show="$store.notifier.successful"
+						class="w-full bg-green-600 border-white border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+						Awesome, we'll let you know!
+					</div>
+					<div
+						x-show="$store.notifier.isInvalid"
+						class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+						Sorry, that email is invalid
+					</div>
+					<div
+						x-show="$store.notifier.systemFailure"
+						class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+						Sorry, our systems broke, please try again later
+					</div>
+				</div>
+			</div>
+		</div>
 
-            <div class="flex space-x-2">
-                <input id="text-input" type="text" x-model="$store.sign.email" placeholder="you@example.me"
-                    class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
-            </div>
-            <label for="text-input" class="block mt-4 mb-2 text-sm font-medium text-neutral-300">
-                Name:
-            </label>
+		<div class="max-w-5xl mx-auto px-4 sm:px-4 lg:px-8">
+			<div class="w-full max-w-md mx-auto p-4">
+				<h2
+					class="text-neutral-200 text-2xl font-semibold mb-4 text-center">
+					Or Sign Up Now:<br /><span class="text-lg font-normal"
+						>No Credit Card Required and We'll give you the first
+						month (weekly), or first week (daily), free once we
+						launch</span
+					>
+				</h2>
 
-            <div class="flex space-x-2 justify-between">
-                <input id="text-input" type="text" x-model="$store.sign.userFirstName" placeholder="First"
-                    class="w-2/5 px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
+				<label
+					for="text-input"
+					class="block mb-2 text-sm font-medium text-neutral-300">
+					Email:
+				</label>
 
-                <input id="text-input" type="text" x-model="$store.sign.userLastName" placeholder="Last"
-                    class="w-2/5 px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
-            </div>
-            <label for="text-input" class="block mt-4 mb-2 text-sm font-medium text-neutral-300">
-                Phone:
-            </label>
+				<div class="flex space-x-2">
+					<input
+						id="text-input"
+						type="text"
+						x-model="$store.sign.email"
+						placeholder="you@example.me"
+						class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
+				</div>
+				<label
+					for="text-input"
+					class="block mt-4 mb-2 text-sm font-medium text-neutral-300">
+					Name:
+				</label>
 
-            <div class="flex space-x-2 justify-between">
-                <input id="text-input" type="text" x-model="$store.sign.phone" placeholder="Phone Number"
-                    class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
-            </div>
+				<div class="flex space-x-2 justify-between">
+					<input
+						id="text-input"
+						type="text"
+						x-model="$store.sign.userFirstName"
+						placeholder="First"
+						class="w-2/5 px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
 
+					<input
+						id="text-input"
+						type="text"
+						x-model="$store.sign.userLastName"
+						placeholder="Last"
+						class="w-2/5 px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
+				</div>
+				<label
+					for="text-input"
+					class="block mt-4 mb-2 text-sm font-medium text-neutral-300">
+					Phone:
+				</label>
 
-            <div class="w-full max-w-md mx-auto p-4 mt-6"
-                x-data="{ topics: $store.sign.userTopics, topicSelectCount: 1 }"
-                @count-overage="alert('too many topics selected, please deselect some')"
-                @sel-add="topics.push($event.detail.name)"
-                @sel-rm="topics.splice(topics.indexOf($event.detail.name), 1)">
-                <h3 class="text-neutral-200 text-xl font-semibold mb-3">Select up to 3 Topics:</h3>
-                <div class="flex flex-wrap gap-2">
-                    <div x-data="{ selected: false }" @click="(() => {
+				<div class="flex space-x-2 justify-between">
+					<input
+						id="text-input"
+						type="text"
+						x-model="$store.sign.phone"
+						placeholder="Phone Number"
+						class="flex-grow px-4 py-2 rounded-md border border-gray-600 bg-neutral-800 text-neutral-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition" />
+				</div>
+
+				<div
+					class="w-full max-w-md mx-auto p-4 mt-6"
+					x-data="{ topics: $store.sign.userTopics, topicSelectCount: 1 }"
+					@count-overage="alert('too many topics selected, please deselect some')"
+					@sel-add="topics.push($event.detail.name)"
+					@sel-rm="topics.splice(topics.indexOf($event.detail.name), 1)">
+					<h3 class="text-neutral-200 text-xl font-semibold mb-3">
+						Select up to 3 Topics:
+					</h3>
+					<div class="flex flex-wrap gap-2">
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -135,16 +217,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            World
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            World
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								World
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								World
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -157,16 +243,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Politics
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Politics
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Politics
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Politics
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -179,16 +269,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Tech
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Tech
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Tech
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Tech
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -201,16 +295,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Finance
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Finance
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Finance
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Finance
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -223,16 +321,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Sports
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Sports
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Sports
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Sports
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -245,16 +347,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Science
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Science
-                        </div>
-                    </div>
-                    <div x-data="{ selected: false }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Science
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Science
+							</div>
+						</div>
+						<div
+							x-data="{ selected: false }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -267,16 +373,20 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            Crime
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
-                            Crime
-                        </div>
-                    </div>
-                    <div x-data="{ selected: true }" @click="(() => {
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								Crime
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20">
+								Crime
+							</div>
+						</div>
+						<div
+							x-data="{ selected: true }"
+							@click="(() => {
                         if (selected) {
                             topicSelectCount--;
                             selected = !selected;
@@ -289,93 +399,133 @@
                             $dispatch('count-overage');
                         }
                         })()">
-                        <div x-show="!selected"
-                            class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
-                            General
-                        </div>
-                        <div x-show="selected"
-                            class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20 selected-selector">
-                            General
-                        </div>
-                    </div>
+							<div
+								x-show="!selected"
+								class="px-4 py-2 border border-gray-600 rounded-md text-neutral-200 bg-neutral-800 hover:bg-neutral-700 cursor-pointer transition">
+								General
+							</div>
+							<div
+								x-show="selected"
+								class="px-4 py-2 border-2 border-white rounded-md text-white bg-neutral-700 hover:bg-neutral-600 hover:border-white cursor-pointer transition duration-150 shadow-md ring-1 ring-white/20 selected-selector">
+								General
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<div
+					class="w-full max-w-md mx-auto p-4 mt-6"
+					x-data="{ rate: $store.sign.userTimeRange }">
+					<h3 class="text-neutral-200 text-xl font-semibold mb-3">
+						Frequency:
+					</h3>
+					<div
+						class="flex justify-center items-center gap-4 bg-neutral-800 p-2 rounded-lg border border-gray-600">
+						<div
+							class="w-1/2"
+							@click="rate === 'daily' ? rate = 'weekly' : rate = 'daily'">
+							<button
+								x-show="rate === 'weekly'"
+								class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-700 hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-white">
+								Weekly
+							</button>
+							<button
+								x-show="rate !== 'weekly'"
+								class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-900 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-white">
+								Weekly
+							</button>
+						</div>
+						<div
+							class="w-1/2"
+							@click="rate === 'daily' ? rate = 'weekly' : rate = 'daily'">
+							<button
+								x-show="rate !== 'daily'"
+								class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-900 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-white">
+								Daily
+							</button>
+							<button
+								x-show="rate === 'daily'"
+								class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-700 hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-white">
+								Daily
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="w-full max-w-md mx-auto p-4 mt-6">
+					<div class="flex items-start mb-2">
+						<input
+							id="weekly-updates"
+							type="checkbox"
+							x-model="$store.sign.userHasConsented"
+							class="mt-1 w-5 h-5 text-white bg-neutral-700 border border-gray-600 rounded focus:ring-white focus:ring-2 flex-shrink-0" />
+						<label
+							for="weekly-updates"
+							class="ml-3 text-neutral-300 text-sm leading-snug">
+							I consent to receive SMS, and agree to the terms,
+							conditions, and privacy promise.
+						</label>
+					</div>
+					<a
+						href="privacy-promise.html"
+						class="block text-sm text-blue-400 hover:underline"
+						>Learn more.</a
+					>
+				</div>
+				<div
+					class="cf-turnstile"
+					data-sitekey="0x4AAAAAABZq1gdDeOFWQS_4"></div>
 
+				<div class="w-full flex justify-end">
+					<button
+						x-text="$store.sign.btnText"
+						@click="$store.sign.signThemUp()"
+						:disabled="!$store.sign.userHasConsented"
+						class="px-4 py-2 rounded-md bg-white text-neutral-900 font-semibold hover:bg-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed">
+						<div
+							x-show="$store.notifier.isProcessing"
+							class="flex items-center justify-center">
+							<svg
+								class="animate-spin h-8 w-8 text-blue-500"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24">
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"></circle>
+								<path
+									class="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+							</svg>
+						</div>
+					</button>
+				</div>
 
-                </div>
-            </div>
-
-
-            <div class="w-full max-w-md mx-auto p-4 mt-6" x-data="{ rate: $store.sign.userTimeRange }">
-                <h3 class="text-neutral-200 text-xl font-semibold mb-3">Frequency:</h3>
-                <div
-                    class="flex justify-center items-center gap-4 bg-neutral-800 p-2 rounded-lg border border-gray-600">
-                    <div class="w-1/2" @click="rate === 'daily' ? rate = 'weekly' : rate = 'daily'">
-                        <button x-show="rate === 'weekly'"
-                            class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-700 hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-white">
-                            Weekly
-                        </button>
-                        <button x-show="rate !== 'weekly'"
-                            class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-900 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-white">
-                            Weekly
-                        </button>
-                    </div>
-                    <div class="w-1/2" @click="rate === 'daily' ? rate = 'weekly' : rate = 'daily'">
-                        <button x-show="rate !== 'daily'"
-                            class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-900 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-white">
-                            Daily
-                        </button>
-                        <button x-show="rate === 'daily'"
-                            class="w-full py-2 text-sm font-medium text-neutral-200 rounded-md transition bg-neutral-700 hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-white">
-                            Daily
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full max-w-md mx-auto p-4 mt-6">
-                <div class="flex items-start mb-2">
-                    <input id="weekly-updates" type="checkbox" x-model="$store.sign.userHasConsented"
-                        class="mt-1 w-5 h-5 text-white bg-neutral-700 border border-gray-600 rounded focus:ring-white focus:ring-2 flex-shrink-0" />
-                    <label for="weekly-updates" class="ml-3 text-neutral-300 text-sm leading-snug">
-                        I consent to receive SMS, and agree to the terms, conditions, and privacy promise.
-                    </label>
-                </div>
-                <a href="privacy-promise.html" class="block text-sm text-blue-400 hover:underline">Learn more.</a>
-            </div>
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAABZq1gdDeOFWQS_4">
-            </div>
-
-            <div class="w-full flex justify-end">
-                <button x-text="$store.sign.btnText" @click="$store.sign.signThemUp()"
-                    :disabled="!$store.sign.userHasConsented"
-                    class="px-4 py-2 rounded-md bg-white text-neutral-900 font-semibold hover:bg-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                    <div x-show="$store.notifier.isProcessing" class="flex items-center justify-center">
-                        <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                            </circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
-                            </path>
-                        </svg>
-                    </div>
-                </button>
-            </div>
-
-
-            <div x-show="$store.sign.successful"
-                class="w-full bg-green-600 border-white border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                Awesome, we'll let you know!</div>
-            <div x-show="$store.sign.isInvalidEmail"
-                class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                Sorry, that email is invalid</div>
-            <div x-show="$store.sign.isInvalidPhone"
-                class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                Sorry, that phone is invalid</div>
-            <div x-show="$store.sign.systemFailure"
-                class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
-                Sorry, our systems broke, please try again later</div>
-        </div>
-    </div>
-    </div>
-</body>
-
+				<div
+					x-show="$store.sign.successful"
+					class="w-full bg-green-600 border-white border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+					Awesome, we'll let you know!
+				</div>
+				<div
+					x-show="$store.sign.isInvalidEmail"
+					class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+					Sorry, that email is invalid
+				</div>
+				<div
+					x-show="$store.sign.isInvalidPhone"
+					class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+					Sorry, that phone is invalid
+				</div>
+				<div
+					x-show="$store.sign.systemFailure"
+					class="w-full bg-rose-400 border-black border-2 rounded-lg h-fit p-2 mt-4 text-center justify-center align-middle text-xl">
+					Sorry, our systems broke, please try again later
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
